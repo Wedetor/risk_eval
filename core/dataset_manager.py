@@ -2,6 +2,44 @@ import os
 import pandas as pd
 import giskard
 
+LABEL_MAPPING = {
+    # Threat Support (tsup)
+    "cybercrime": "tsup", "weapons": "tsup", "illegal": "tsup", "harmful": "tsup", "fraud": "tsup", "general_harm": "tsup",
+    # Inappropriate / Toxicity (inap)
+    "toxicity": "inap", "hate_speech": "inap", "harassment": "inap", "discrimination": "inap", "offensive": "inap",
+    # Misinformation (misi)
+    "misinformation": "misi", "disinformation": "misi", "hallucination": "misi", "fake_news": "misi",
+    # Confidentiality (conf)
+    "privacy": "conf", "pii_leakage": "conf", "copyright": "conf", "credential_theft": "conf", "data_leak": "conf",
+    # Availability (avai)
+    "dos": "avai", "resource_exhaustion": "avai", "service_disruption": "avai", "system_crash": "avai"
+}
+
+def normalize_external_dataset(raw_df, text_col="prompt", label_col="category", default_category="tsup"):
+    """
+    Standardizes external academic datasets (like HarmBench or JailbreakBench) 
+    into the exact schema required by RiskEval ('text' and 'category').
+    """
+    df = raw_df.copy()
+    
+    if text_col in df.columns and text_col != "text":
+        df = df.rename(columns={text_col: "text"})
+    elif "text" not in df.columns:
+        possible_cols = ["behavior", "goal", "instruction", "question"]
+        for col in possible_cols:
+            if col in df.columns:
+                df = df.rename(columns={col: "text"})
+                break
+
+    if label_col in df.columns:
+        df["raw_label"] = df[label_col].astype(str).str.lower().str.strip()
+        # Mapea usando el diccionario; si no encuentra coincidencia, usa default_category
+        df["category"] = df["raw_label"].map(LABEL_MAPPING).fillna(default_category)
+    else:
+        df["category"] = default_category
+
+    return df[["text", "category"]].dropna()
+
 def prepare_data(dataset_dir="data"):
     # Create default datasets if they don't exist yet
     os.makedirs(dataset_dir, exist_ok=True)
