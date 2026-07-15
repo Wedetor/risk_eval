@@ -27,23 +27,28 @@ def count_giskard_hits(scan_results):
     # ========== ^ Debug ^ ==========
 
     for issue in scan_results.issues:
-        group = issue.group.name.lower()
+        # Layer 1 & 2: Extract group title and vulnerability description in lowercase
+        group = str(getattr(issue, "group", "") or "").lower()
+        desc = str(getattr(issue, "description", "") or "").lower()
+        combined_text = f"{group} {desc}"
+
         try:
-            # Extract the exact number of failing adversarial examples generated for this vulnerability
             num_hits = len(issue.examples(n=1000))
         except Exception:
             num_hits = 1 
 
+        # ====== v Debug v =====
         debug_giskard_raw_groups.append((group, num_hits))
+        # ====== ^ Debug ^ =====
 
         # Exhaustive keyword mapping from Giskard's dynamic taxonomy to our 5 mathematical variables
-        if any(kw in group for kw in ["leak", "theft", "disclosure", "privacy", "confidentiality", "pii"]): 
+        if any(kw in combined_text for kw in ["leak", "theft", "disclosure", "privacy", "confidentiality", "pii", "credential", "password", "private key", "ssn", "personal data", "sensitive information"]): 
             hits["conf"] += num_hits
-        elif any(kw in group for kw in ["misinformation", "hallucination", "accuracy", "fact", "fictitious", "truth"]): 
+        elif any(kw in combined_text for kw in ["misinformation", "hallucination", "accuracy", "fact", "fictitious", "truth", "false", "conspiracy", "rumor", "medical advice", "inaccurate"]): 
             hits["misi"] += num_hits
-        elif any(kw in group for kw in ["toxicity", "stereotype", "discrimination", "bias", "hate", "harassment", "offensive", "inappropriate"]): 
+        elif any(kw in combined_text for kw in ["toxicity", "stereotype", "discrimination", "bias", "hate", "harassment", "offensive", "inappropriate", "slur", "racist", "sexist", "bullying"]): 
             hits["inap"] += num_hits
-        elif any(kw in group for kw in ["dos", "exhaustion", "crash", "availability", "disruption"]): 
+        elif any(kw in combined_text for kw in ["dos", "exhaustion", "crash", "availability", "disruption", "freeze", "memory"]): 
             hits["avai"] += num_hits
         else:
             # If it's general harm, code injection, malware, jailbreak compliance, or illegal advice -> Threat Support
@@ -155,8 +160,6 @@ def calculate_metrics(simple_hits, results_advanced, age_group, industry, mode="
         json.dump(final_metrics, f, indent=4)
 
     print(f"\n[i] Metrics report saved to: '{json_path}'")
-    
-    # Generate HTML chart in the same reports folder
     generate_html_chart(final_metrics, output_dir=output_dir)
 
     return final_metrics
