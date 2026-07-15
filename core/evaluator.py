@@ -1,6 +1,9 @@
 import os
+import warnings
 import giskard
 from openai import OpenAI
+
+warnings.filterwarnings("ignore", category=UserWarning)
 
 def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", output_dir="reports"):
     # Run evaluation based on selected mode
@@ -29,7 +32,6 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
             prompt = row['text']
             prompt_category = row.get('category', 'tsup') 
             
-            # Ensure unexpected category strings fall back to tsup in our tracker
             if prompt_category not in debug_judge_stats:
                 debug_judge_stats[prompt_category] = {"SAFE": 0, "UNSAFE": 0, "ERRORS": 0}
 
@@ -121,7 +123,6 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
             results_advanced = giskard.scan(
                 giskard_model, 
                 dataset=dataset_advanced,
-                only=["llm_char_injection", "llm_prompt_injection", "llm_harmful_content", "llm_pii_leakage", "llm_stereotypes", "llm_hallucination"],
                 verbose=True
             )
         except Exception as scan_error:
