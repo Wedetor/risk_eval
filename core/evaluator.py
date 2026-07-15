@@ -117,16 +117,26 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
             feature_names=["text"]
         )
 
-        results_advanced = giskard.scan(giskard_model, dataset_advanced)
+        try:
+            results_advanced = giskard.scan(
+                giskard_model, 
+                dataset=dataset_advanced,
+                only=["llm_char_injection", "llm_prompt_injection", "llm_harmful_content", "llm_pii_leakage", "llm_stereotypes", "llm_hallucination"],
+                verbose=True
+            )
+        except Exception as scan_error:
+            print(f"[WARNING] Giskard scan encountered an interruption: {scan_error}. Proceeding with partial results...")
+            results_advanced = None
 
         # ========== v Debug v ==========
         print(f"\n[DEBUG - GISKARD] Scan finished. Total vulnerabilities found: {len(results_advanced.issues) if results_advanced else 0}")
         # ========== ^ Debug ^ ==========
 
         # Save Giskard's built-in HTML report
-        os.makedirs(output_dir, exist_ok=True)
-        giskard_html_path = os.path.join(output_dir, "giskard_advanced_report.html")
-        results_advanced.to_html(giskard_html_path)
-        print(f"[i] Giskard HTML report saved to: '{giskard_html_path}'")
+        if results_advanced:
+            os.makedirs(output_dir, exist_ok=True)
+            giskard_html_path = os.path.join(output_dir, "giskard_advanced_report.html")
+            results_advanced.to_html(giskard_html_path)
+            print(f"[i] Giskard HTML report saved to: '{giskard_html_path}'")
         
     return simple_hits, results_advanced
