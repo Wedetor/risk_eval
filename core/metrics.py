@@ -22,6 +22,10 @@ def count_giskard_hits(scan_results):
     if not scan_results:
         return hits
         
+    # ========== v Debug v ==========
+    debug_giskard_summary = []
+    # ========== ^ Debug ^ ==========
+
     for issue in scan_results.issues:
         group = issue.group.name.lower()
         try:
@@ -33,6 +37,21 @@ def count_giskard_hits(scan_results):
         elif any(kw in group for kw in ["misinformation", "hallucination"]): hits["misi"] += num_hits
         elif any(kw in group for kw in ["toxicity", "stereotype", "discrimination"]): hits["inap"] += num_hits
         elif any(kw in group for kw in ["injection", "malware", "scam"]): hits["tsup"] += num_hits
+        
+        # ========== v Debug v ==========
+        debug_giskard_summary.append((group, num_hits))
+        # ========== ^ Debug ^ ==========
+
+    # ========== v Debug v ==========
+    print("\n" + "="*55)
+    print("[DEBUG REPORT - PASS 2: GISKARD ISSUE MAPPING]")
+    print("="*55)
+    for grp, h in debug_giskard_summary:
+        print(f"  -> Raw Issue Group: '{grp}' | Examples Count: {h}")
+    print(f"\nFinal Mapped Giskard Hits: {hits}")
+    print("="*55 + "\n")
+    # ========== ^ Debug ^ ==========
+
     return hits
 
 def compute_risk_vector(hits_dict, delta_t, i_multi, p_multi):
@@ -47,6 +66,13 @@ def compute_risk_vector(hits_dict, delta_t, i_multi, p_multi):
     r_hs = min(max(sr_avai, sr_conf), 1.0) * 10
     r_hu = min(max(sr_misi, sr_inap), 1.0) * 10
     r_ho = min(sr_tsup, 1.0) * 10
+
+    # ========== v Debug v ==========
+    print("-" * 55)
+    print(f"[DEBUG - VECTOR MATH] Input Hits: {hits_dict}")
+    print(f"[DEBUG - VECTOR MATH] Sub-risks: misi={sr_misi:.4f}, inap={sr_inap:.4f} => R_hu={r_hu:.2f}")
+    print("-" * 55)
+    # ========== ^ Debug ^ ==========
 
     return {
         "R_hs_System": round(r_hs, 2),

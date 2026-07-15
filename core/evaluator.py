@@ -19,10 +19,20 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
         simple_hits = {"conf": 0, "avai": 0, "misi": 0, "inap": 0, "tsup": 0}
         df_simple = dataset_simple.df
         
+        # ========== v Debug v ==========
+        # Silent trackers to collect stats without flooding the terminal
+        debug_csv_categories = df_simple['category'].value_counts().to_dict() if 'category' in df_simple.columns else {}
+        debug_judge_stats = {cat: {"SAFE": 0, "UNSAFE": 0, "ERRORS": 0} for cat in ["conf", "avai", "misi", "inap", "tsup"]}
+        # ========== ^ Debug ^ ==========
+        
         for index, row in df_simple.iterrows():
             prompt = row['text']
             prompt_category = row.get('category', 'tsup') 
             
+            # Ensure unexpected category strings fall back to tsup in our tracker
+            if prompt_category not in debug_judge_stats:
+                debug_judge_stats[prompt_category] = {"SAFE": 0, "UNSAFE": 0, "ERRORS": 0}
+
             try:
                 response = client.chat.completions.create(
                     model="Local-Model",
@@ -53,9 +63,32 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
                         simple_hits[prompt_category] += 1
                     else:
                         simple_hits["tsup"] += 1
+                    
+                    # ========== v Debug v ==========
+                    debug_judge_stats[prompt_category]["UNSAFE"] += 1
+                    # ========== ^ Debug ^ ==========
+                else:
+                    # ========== v Debug v ==========
+                    debug_judge_stats[prompt_category]["SAFE"] += 1
+                    # ========== ^ Debug ^ ==========
                         
             except Exception as e:
-                print(f"[ERROR] Pass 1 request failed at index {index}: {e}")
+                # ========== v Debug v ==========
+                debug_judge_stats[prompt_category]["ERRORS"] += 1
+                # ========== ^ Debug ^ ==========
+
+        # ========== v Debug v ==========
+        # Print consolidated report only after the entire loop finishes
+        print("\n" + "="*55)
+        print("[DEBUG REPORT - PASS 1: SIMPLE INDUCTION]")
+        print("="*55)
+        print(f"Total Prompts Processed: {len(df_simple)}")
+        print(f"CSV Category Distribution: {debug_csv_categories}")
+        print("\nJudge Decision Breakdown per Category:")
+        for cat, stats in debug_judge_stats.items():
+            print(f"  -> [{cat.upper().ljust(4)}]: UNSAFE (Hits) = {str(stats['UNSAFE']).ljust(3)} | SAFE = {str(stats['SAFE']).ljust(3)} | ERRORS = {stats['ERRORS']}")
+        print("="*55 + "\n")
+        # ========== ^ Debug ^ ==========
 
     # Pass 2: Giskard mutation engine (Advanced Induction)
     if mode in ["advanced", "complete"]:
@@ -85,6 +118,10 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
         )
 
         results_advanced = giskard.scan(giskard_model, dataset_advanced)
+
+        # ========== v Debug v ==========
+        print(f"\n[DEBUG - GISKARD] Scan finished. Total vulnerabilities found: {len(results_advanced.issues) if results_advanced else 0}")
+        # ========== ^ Debug ^ ==========
 
         # Save Giskard's built-in HTML report
         os.makedirs(output_dir, exist_ok=True)
