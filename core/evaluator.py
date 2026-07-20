@@ -123,6 +123,7 @@ def run_scan(target_url, dataset_simple, dataset_advanced, mode="complete", outp
             results_advanced = giskard.scan(
                 giskard_model, 
                 dataset=dataset_advanced,
+                max_issues_per_detector=60,
                 verbose=True
             )
         except Exception as scan_error:
