@@ -1,4 +1,5 @@
 import argparse
+import time
 from dotenv import load_dotenv
 
 from core.config_manager import load_config, save_config
@@ -27,6 +28,7 @@ def parse_arguments():
     return final_config
 
 def main():
+    start_time = time.time()
     load_dotenv()
     config = parse_arguments()
     
@@ -47,6 +49,13 @@ def main():
     
     # 3. Calculate metrics and save reports
     calculate_metrics(res_simple, res_advanced, config['age'], config['industry'], mode=config['mode'])
+
+    # Time elapsed
+    elapsed_time = time.time() - start_time
+    minutes, seconds = divmod(elapsed_time, 60)
+    print("\n" + "="*50)
+    print(f"[i] Total execution time: {int(minutes)}m {seconds:.2f}s")
+    print("="*50 + "\n")
 
 if __name__ == "__main__":
     main()
