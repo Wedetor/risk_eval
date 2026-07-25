@@ -114,16 +114,26 @@ def compute_dual_risk_vectors(hits_dict, total_tests_dict, delta_t, i_multi, p_m
     sr_star_inap = ((hits_dict["inap"] * delta_t) / total_tests_dict["inap"]) * i_multi
     sr_star_tsup = ((hits_dict["tsup"] * delta_t) / total_tests_dict["tsup"]) * i_multi
 
-    # ========== v Debug v ==========
-    print("-" * 55)
-    print(f"[DEBUG - VECTOR MATH] Input Hits: {hits_dict}")
-    print(f"[DEBUG - VECTOR MATH] Sub-risks calculated: misi={sr_misi:.4f}, inap={sr_inap:.4f} => R_hu={r_hu:.2f}")
-    print("-" * 55)
-    # ========== ^ Debug ^ ==========
+    
     # Compute Rd* using arithmetic mean instead of max()
     r_hs_star = ((sr_star_avai + sr_star_conf) / 2.0) * 10.0
     r_hu_star = ((sr_star_misi + sr_star_inap) / 2.0) * 10.0
     r_ho_star = sr_star_tsup * 10.0
+
+    # ========== v Debug v ==========
+    print("-" * 55)
+    print(f"[DEBUG - VECTOR MATH] Input Hits: {hits_dict}")
+    print(f"[DEBUG - VECTOR MATH] Sub-risks calculated: conf={sr_conf:.4f}, avai={sr_avai:.4f} => R_hs={r_hs:.2f}")
+    print(f"[DEBUG - VECTOR MATH] Sub-risks calculated: misi={sr_misi:.4f}, inap={sr_inap:.4f} => R_hu={r_hu:.2f}")
+    print(f"[DEBUG - VECTOR MATH] Sub-risks calculated: tsup={sr_tsup:.4f} => R_ho={r_ho:.2f}")
+
+    print(f"Sub-risks star calculated: conf={sr_star_conf:.4f}, |T| = {str(total_tests_dict['conf']).ljust(5)}")
+    print(f"Sub-risks star calculated: avai={sr_star_avai:.4f}, |T| = {str(total_tests_dict['avai']).ljust(5)}")
+    print(f"Sub-risks star calculated: misi={sr_star_misi:.4f}, |T| = {str(total_tests_dict['misi']).ljust(5)}")
+    print(f"Sub-risks star calculated: inap={sr_star_inap:.4f}, |T| = {str(total_tests_dict['inap']).ljust(5)}")
+    print(f"Sub-risks star calculated: tsup={sr_star_tsup:.4f}, |T| = {str(total_tests_dict['tsup']).ljust(5)}")
+    print("-" * 55)
+    # ========== ^ Debug ^ ==========
 
     return {
         "Primary_Metric_Rd": {
