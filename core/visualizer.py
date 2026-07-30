@@ -4,20 +4,16 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
     os.makedirs(output_dir, exist_ok=True)
     filepath = os.path.join(output_dir, html_filename)
 
-    # Extract primary Rd vectors (default to 0 if skipped)
-    simple_rd = metrics_data.get("Results", {}).get("Simple_Induction", {}).get("Risk_Vector_Rd", {"R_hs_System": 0, "R_hu_User": 0, "R_ho_ThirdParty": 0})
-    advanced_rd = metrics_data.get("Results", {}).get("Advanced_Induction", {}).get("Risk_Vector_Rd", {"R_hs_System": 0, "R_hu_User": 0, "R_ho_ThirdParty": 0})
-    
-    # Extract secondary Rd* vectors (default to 0 if skipped)
-    simple_star = metrics_data.get("Results", {}).get("Simple_Induction", {}).get("Secondary_Metric_Rd_Star", {"R_hs_star_System": 0, "R_hu_star_User": 0, "R_ho_star_ThirdParty": 0})
-    advanced_star = metrics_data.get("Results", {}).get("Advanced_Induction", {}).get("Secondary_Metric_Rd_Star", {"R_hs_star_System": 0, "R_hu_star_User": 0, "R_ho_star_ThirdParty": 0})
+    # Extract unified metrics
+    unified = metrics_data.get("Results", {}).get("Unified_Evaluation", {})
+    rd = unified.get("Primary_Metric_Rd", {"R_hs_System": 0, "R_hu_User": 0, "R_ho_ThirdParty": 0})
+    rd_star = unified.get("Secondary_Metric_Rd_Star", {"R_hs_star_System": 0, "R_hu_star_User": 0, "R_ho_star_ThirdParty": 0})
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RiskEval - Multidimensional Risk Report</title>
-    <!-- Chart.js loaded via CDN -->
+    <title>RiskEval - Unified Risk Report</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {{ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 40px; background-color: #f4f6f9; color: #2c3e50; }}
@@ -28,23 +24,21 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
         table {{ width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; text-align: center; }}
         th, td {{ padding: 10px; border: 1px solid #e2e8f0; }}
         th {{ background-color: #f8fafc; color: #475569; font-weight: 600; }}
-        .tag-simple {{ color: #0284c7; font-weight: bold; }}
-        .tag-adv {{ color: #e11d48; font-weight: bold; }}
+        .tag-unified {{ color: #7c3aed; font-weight: bold; }}
     </style>
 </head>
 <body>
     <div class="container">
         <!-- SECTION 1: PRIMARY METRIC (Rd) -->
-        <h2>Multidimensional Risk Audit (Vector R<sub>d</sub>)</h2>
-        <p class="subtitle">Maximum Potential Damage — Simple vs. Advanced Induction</p>
-        <canvas id="riskChartRd" width="400" height="200"></canvas>
+        <h2>Unified Risk Audit (Vector R<sub>d</sub>)</h2>
+        <p class="subtitle">Maximum Damage Model (10-Pass Average)</p>
+        <canvas id="riskChartRd" width="400" height="150"></canvas>
         <table>
             <thead>
                 <tr><th>Evaluation Mode</th><th>System Risk (R_hs)</th><th>User Risk (R_hu)</th><th>Third-Party Risk (R_ho)</th></tr>
             </thead>
             <tbody>
-                <tr><td class="tag-simple">Simple Induction (δ = 0.77)</td><td>{simple_rd.get('R_hs_System', 0)}</td><td>{simple_rd.get('R_hu_User', 0)}</td><td>{simple_rd.get('R_ho_ThirdParty', 0)}</td></tr>
-                <tr><td class="tag-adv">Advanced Induction (δ = 0.44)</td><td>{advanced_rd.get('R_hs_System', 0)}</td><td>{advanced_rd.get('R_hu_User', 0)}</td><td>{advanced_rd.get('R_ho_ThirdParty', 0)}</td></tr>
+                <tr><td class="tag-unified">Unified Model</td><td>{rd.get('R_hs_System', 0)}</td><td>{rd.get('R_hu_User', 0)}</td><td>{rd.get('R_ho_ThirdParty', 0)}</td></tr>
             </tbody>
         </table>
 
@@ -52,15 +46,14 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
 
         <!-- SECTION 2: SECONDARY METRIC (Rd*) -->
         <h2>Normalized Severity Audit (Vector R<sup>*</sup><sub>d</sub>)</h2>
-        <p class="subtitle">Weighted Average Density — Simple vs. Advanced Induction</p>
-        <canvas id="riskChartRdStar" width="400" height="200"></canvas>
+        <p class="subtitle">Weighted Average Density Focus — Normalized by total |T|</p>
+        <canvas id="riskChartRdStar" width="400" height="150"></canvas>
         <table>
             <thead>
                 <tr><th>Evaluation Mode</th><th>System Risk (R_hs*)</th><th>User Risk (R_hu*)</th><th>Third-Party Risk (R_ho*)</th></tr>
             </thead>
             <tbody>
-                <tr><td class="tag-simple">Simple Induction (δ = 0.77)</td><td>{simple_star.get('R_hs_star_System', 0)}</td><td>{simple_star.get('R_hu_star_User', 0)}</td><td>{simple_star.get('R_ho_star_ThirdParty', 0)}</td></tr>
-                <tr><td class="tag-adv">Advanced Induction (δ = 0.44)</td><td>{advanced_star.get('R_hs_star_System', 0)}</td><td>{advanced_star.get('R_hu_star_User', 0)}</td><td>{advanced_star.get('R_ho_star_ThirdParty', 0)}</td></tr>
+                <tr><td class="tag-unified">Unified Model</td><td>{rd_star.get('R_hs_star_System', 0)}</td><td>{rd_star.get('R_hu_star_User', 0)}</td><td>{rd_star.get('R_ho_star_ThirdParty', 0)}</td></tr>
             </tbody>
         </table>
     </div>
@@ -68,68 +61,34 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
     <script>
         const commonOptions = {{
             responsive: true,
-            scales: {{
-                y: {{ 
-                    beginAtZero: true, 
-                    max: 10, 
-                    title: {{ display: true, text: 'Risk Level (0.0 - 10.0)', font: {{ weight: 'bold' }} }} 
-                }}
-            }},
-            plugins: {{ legend: {{ position: 'top' }} }}
+            scales: {{ y: {{ beginAtZero: true, max: 10, title: {{ display: true, text: 'Risk Level (0.0 - 10.0)', font: {{ weight: 'bold' }} }} }} }},
+            plugins: {{ legend: {{ display: false }} }}
         }};
 
-        // Render Chart 1: Primary Rd
-        const ctxRd = document.getElementById('riskChartRd').getContext('2d');
-        new Chart(ctxRd, {{
+        new Chart(document.getElementById('riskChartRd').getContext('2d'), {{
             type: 'bar',
             data: {{
                 labels: ['System Risk (R_hs)', 'User Risk (R_hu)', 'Third-Party Risk (R_ho)'],
-                datasets: [
-                    {{
-                        label: 'Simple Induction (δ = 0.77)',
-                        data: [{simple_rd.get('R_hs_System', 0)}, {simple_rd.get('R_hu_User', 0)}, {simple_rd.get('R_ho_ThirdParty', 0)}],
-                        backgroundColor: 'rgba(54, 162, 235, 0.75)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }},
-                    {{
-                        label: 'Advanced Induction (δ = 0.44)',
-                        data: [{advanced_rd.get('R_hs_System', 0)}, {advanced_rd.get('R_hu_User', 0)}, {advanced_rd.get('R_ho_ThirdParty', 0)}],
-                        backgroundColor: 'rgba(255, 99, 132, 0.75)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }}
-                ]
+                datasets: [{{
+                    data: [{rd.get('R_hs_System', 0)}, {rd.get('R_hu_User', 0)}, {rd.get('R_ho_ThirdParty', 0)}],
+                    backgroundColor: 'rgba(124, 58, 237, 0.75)',
+                    borderColor: 'rgba(124, 58, 237, 1)',
+                    borderWidth: 1, borderRadius: 4
+                }}]
             }},
             options: commonOptions
         }});
 
-        // Render Chart 2: Secondary Rd*
-        const ctxRdStar = document.getElementById('riskChartRdStar').getContext('2d');
-        new Chart(ctxRdStar, {{
+        new Chart(document.getElementById('riskChartRdStar').getContext('2d'), {{
             type: 'bar',
             data: {{
                 labels: ['System Risk (R_hs*)', 'User Risk (R_hu*)', 'Third-Party Risk (R_ho*)'],
-                datasets: [
-                    {{
-                        label: 'Simple Induction (δ = 0.77)',
-                        data: [{simple_star.get('R_hs_star_System', 0)}, {simple_star.get('R_hu_star_User', 0)}, {simple_star.get('R_ho_star_ThirdParty', 0)}],
-                        backgroundColor: 'rgba(54, 162, 235, 0.75)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }},
-                    {{
-                        label: 'Advanced Induction (δ = 0.44)',
-                        data: [{advanced_star.get('R_hs_star_System', 0)}, {advanced_star.get('R_hu_star_User', 0)}, {advanced_star.get('R_ho_star_ThirdParty', 0)}],
-                        backgroundColor: 'rgba(255, 99, 132, 0.75)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        borderRadius: 4
-                    }}
-                ]
+                datasets: [{{
+                    data: [{rd_star.get('R_hs_star_System', 0)}, {rd_star.get('R_hu_star_User', 0)}, {rd_star.get('R_ho_star_ThirdParty', 0)}],
+                    backgroundColor: 'rgba(16, 185, 129, 0.75)',
+                    borderColor: 'rgba(16, 185, 129, 1)',
+                    borderWidth: 1, borderRadius: 4
+                }}]
             }},
             options: commonOptions
         }});
@@ -137,7 +96,6 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
 </body>
 </html>"""
 
-    # Save generated HTML report
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(html_content)
     print(f"[i] HTML visualizer saved to: '{filepath}'")
