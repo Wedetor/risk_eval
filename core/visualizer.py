@@ -9,6 +9,36 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
     rd = unified.get("Primary_Metric_Rd", {"R_hs_System": 0, "R_hu_User": 0, "R_ho_ThirdParty": 0})
     rd_star = unified.get("Secondary_Metric_Rd_Star", {"R_hs_star_System": 0, "R_hu_star_User": 0, "R_ho_star_ThirdParty": 0})
 
+    # Values
+    hs = rd.get('R_hs_System', 0)
+    hu = rd.get('R_hu_User', 0)
+    ho = rd.get('R_ho_ThirdParty', 0)
+
+    hs_s = rd_star.get('R_hs_star_System', 0)
+    hu_s = rd_star.get('R_hu_star_User', 0)
+    ho_s = rd_star.get('R_ho_star_ThirdParty', 0)
+
+    # CVSS Color Mapper
+    def get_cvss_style(val):
+        if val <= 3.9:
+            return "'rgba(34, 197, 94, 0.75)'", "'rgba(34, 197, 94, 1)'", "#16a34a"  # Low (Green)
+        elif val <= 6.9:
+            return "'rgba(234, 179, 8, 0.75)'", "'rgba(234, 179, 8, 1)'", "#ca8a04"   # Medium (Yellow)
+        elif val <= 8.9:
+            return "'rgba(239, 68, 68, 0.75)'", "'rgba(239, 68, 68, 1)'", "#dc2626"  # High (Red)
+        else:
+            return "'rgba(168, 85, 247, 0.75)'", "'rgba(168, 85, 247, 1)'", "#9333ea" # Critical (Purple)
+
+    # Resolve colors for primary vector
+    c_hs_bg, c_hs_bd, c_hs_txt = get_cvss_style(hs)
+    c_hu_bg, c_hu_bd, c_hu_txt = get_cvss_style(hu)
+    c_ho_bg, c_ho_bd, c_ho_txt = get_cvss_style(ho)
+
+    # Resolve colors for secondary vector
+    s_hs_bg, s_hs_bd, s_hs_txt = get_cvss_style(hs_s)
+    s_hu_bg, s_hu_bd, s_hu_txt = get_cvss_style(hu_s)
+    s_ho_bg, s_ho_bd, s_ho_txt = get_cvss_style(ho_s)
+
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,21 +54,25 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
         table {{ width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.9em; text-align: center; }}
         th, td {{ padding: 10px; border: 1px solid #e2e8f0; }}
         th {{ background-color: #f8fafc; color: #475569; font-weight: 600; }}
-        .tag-unified {{ color: #7c3aed; font-weight: bold; }}
+        .tag-unified {{ color: #2c3e50; font-weight: bold; }}
     </style>
 </head>
 <body>
     <div class="container">
         <!-- SECTION 1: PRIMARY METRIC (Rd) -->
-        <h2>Unified Risk Audit (Vector R<sub>d</sub>)</h2>
-        <p class="subtitle">Maximum Damage Model (10-Pass Average)</p>
+        <h2>Risk Audit (Vector R<sub>d</sub>)</h2>
+        <p class="subtitle">Maximum Damage</p>
         <canvas id="riskChartRd" width="400" height="150"></canvas>
         <table>
             <thead>
-                <tr><th>Evaluation Mode</th><th>System Risk (R_hs)</th><th>User Risk (R_hu)</th><th>Third-Party Risk (R_ho)</th></tr>
+                <tr><th>System Risk (R_hs)</th><th>User Risk (R_hu)</th><th>Third-Party Risk (R_ho)</th></tr>
             </thead>
             <tbody>
-                <tr><td class="tag-unified">Unified Model</td><td>{rd.get('R_hs_System', 0)}</td><td>{rd.get('R_hu_User', 0)}</td><td>{rd.get('R_ho_ThirdParty', 0)}</td></tr>
+                <tr>
+                    <td style="color: {c_hs_txt}; font-weight: bold;">{hs}</td>
+                    <td style="color: {c_hu_txt}; font-weight: bold;">{hu}</td>
+                    <td style="color: {c_ho_txt}; font-weight: bold;">{ho}</td>
+                </tr>
             </tbody>
         </table>
 
@@ -46,14 +80,18 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
 
         <!-- SECTION 2: SECONDARY METRIC (Rd*) -->
         <h2>Normalized Severity Audit (Vector R<sup>*</sup><sub>d</sub>)</h2>
-        <p class="subtitle">Weighted Average Density Focus — Normalized by total |T|</p>
+        <p class="subtitle">Weighted Average Density</p>
         <canvas id="riskChartRdStar" width="400" height="150"></canvas>
         <table>
             <thead>
-                <tr><th>Evaluation Mode</th><th>System Risk (R_hs*)</th><th>User Risk (R_hu*)</th><th>Third-Party Risk (R_ho*)</th></tr>
+                <tr><th>System Risk (R_hs*)</th><th>User Risk (R_hu*)</th><th>Third-Party Risk (R_ho*)</th></tr>
             </thead>
             <tbody>
-                <tr><td class="tag-unified">Unified Model</td><td>{rd_star.get('R_hs_star_System', 0)}</td><td>{rd_star.get('R_hu_star_User', 0)}</td><td>{rd_star.get('R_ho_star_ThirdParty', 0)}</td></tr>
+                <tr>
+                    <td style="color: {s_hs_txt}; font-weight: bold;">{hs_s}</td>
+                    <td style="color: {s_hu_txt}; font-weight: bold;">{hu_s}</td>
+                    <td style="color: {s_ho_txt}; font-weight: bold;">{ho_s}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -70,9 +108,9 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
             data: {{
                 labels: ['System Risk (R_hs)', 'User Risk (R_hu)', 'Third-Party Risk (R_ho)'],
                 datasets: [{{
-                    data: [{rd.get('R_hs_System', 0)}, {rd.get('R_hu_User', 0)}, {rd.get('R_ho_ThirdParty', 0)}],
-                    backgroundColor: 'rgba(124, 58, 237, 0.75)',
-                    borderColor: 'rgba(124, 58, 237, 1)',
+                    data: [{hs}, {hu}, {ho}],
+                    backgroundColor: [{c_hs_bg}, {c_hu_bg}, {c_ho_bg}],
+                    borderColor: [{c_hs_bd}, {c_hu_bd}, {c_ho_bd}],
                     borderWidth: 1, borderRadius: 4
                 }}]
             }},
@@ -84,9 +122,9 @@ def generate_html_chart(metrics_data, output_dir="reports", html_filename="risk_
             data: {{
                 labels: ['System Risk (R_hs*)', 'User Risk (R_hu*)', 'Third-Party Risk (R_ho*)'],
                 datasets: [{{
-                    data: [{rd_star.get('R_hs_star_System', 0)}, {rd_star.get('R_hu_star_User', 0)}, {rd_star.get('R_ho_star_ThirdParty', 0)}],
-                    backgroundColor: 'rgba(16, 185, 129, 0.75)',
-                    borderColor: 'rgba(16, 185, 129, 1)',
+                    data: [{hs_s}, {hu_s}, {ho_s}],
+                    backgroundColor: [{s_hs_bg}, {s_hu_bg}, {s_ho_bg}],
+                    borderColor: [{s_hs_bd}, {s_hu_bd}, {s_ho_bd}],
                     borderWidth: 1, borderRadius: 4
                 }}]
             }},
