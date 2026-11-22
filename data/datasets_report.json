@@ -1,0 +1,50 @@
+{
+  "sources": {
+    "harmbench": {
+      "url": "https://raw.githubusercontent.com/centerforaisafety/HarmBench/8e1604d1171fe8a48d8febecd22f600e462bdcdd/data/behavior_datasets/harmbench_behaviors_text_all.csv",
+      "sha256": "8d81accedd38eaaf8b760618622bb888417d1fd0c86eba65c427a16f1cbb4afc"
+    },
+    "advbench": {
+      "url": "https://raw.githubusercontent.com/llm-attacks/llm-attacks/a62d1307e38b3a076e614b20781c785fd860d813/data/advbench/harmful_behaviors.csv",
+      "sha256": "6cd1a5c63c07610d7eb67307772ee5606017ee950b5770ab288a2c487489d3e1"
+    }
+  },
+  "simple": {
+    "rows": 400,
+    "per_category": {
+      "conf": 124,
+      "avai": 5,
+      "misi": 62,
+      "inap": 33,
+      "tsup": 176
+    },
+    "per_evaluation": {
+      "classifier": 300,
+      "hash_lyrics": 50,
+      "hash_book": 50
+    },
+    "with_context": 100
+  },
+  "advanced": {
+    "rows": 669,
+    "per_category": {
+      "conf": 124,
+      "avai": 25,
+      "misi": 0,
+      "inap": 0,
+      "tsup": 520
+    },
+    "per_source": {
+      "advbench": 520,
+      "harmbench": 129,
+      "custom": 20
+    },
+    "per_evaluation": {
+      "classifier": 569,
+      "hash_lyrics": 50,
+      "hash_book": 50
+    },
+    "with_context": 9
+  },
+  "copyright_reference_hashes_missing": 98
+}

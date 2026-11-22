@@ -5,5 +5,16 @@ env/
 .env
 
 *.gguf
-data/
+# Datasets and their pinned sources are committed (tools/build_datasets.py rebuilds them).
+data/*
+!data/simple_induction.csv
+!data/advanced_induction.csv
+!data/default_seed.csv
+!data/datasets_report.json
+!data/sources/
+# HarmBench copyright reference hashes (~293 MB): downloaded and verified by the build script.
+data/sources/harmbench_copyright_hashes/
 __pycache__/
+# Run logs (JSONL with full prompts/answers) - share them outside git.
+runs/
+reports/

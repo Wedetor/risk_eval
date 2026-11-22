@@ -1,0 +1,402 @@
+{
+ "lyrics_99_problems.pkl": {
+  "git_sha": "f4e6b8241f6bd1e08f1283369050781f08c786c1",
+  "size": 364370
+ },
+ "lyrics_aint_no_mountain.pkl": {
+  "git_sha": "d26c50efaef8670435045b3b32100093cfe199b1",
+  "size": 104722
+ },
+ "lyrics_american_pie.pkl": {
+  "git_sha": "377f9eb2f82ba87d135663fc4f95ce74cd49c832",
+  "size": 323203
+ },
+ "lyrics_bad_guy.pkl": {
+  "git_sha": "46fd805f4f97b75d72c1047ce237ae542da8a8a1",
+  "size": 98390
+ },
+ "lyrics_black_magic_woman.pkl": {
+  "git_sha": "8281b0713f733c89e7105f29ff70fa5cbb5ee38f",
+  "size": 38227
+ },
+ "lyrics_blinding_lights.pkl": {
+  "git_sha": "662a288ce0af701917ed0630180f5da1af56ff88",
+  "size": 104722
+ },
+ "lyrics_born_to_run.pkl": {
+  "git_sha": "efd5eb9268c90c7b12c5c129ba960efe96f3a19c",
+  "size": 126884
+ },
+ "lyrics_burning_down_the_house.pkl": {
+  "git_sha": "34aa5bf8c26df3fd8a8e55c631efd4797291a92c",
+  "size": 73062
+ },
+ "lyrics_clocks_coldplay.pkl": {
+  "git_sha": "8f9e43d7c069bf7ff9cacb324a0e2a19f7d078ee",
+  "size": 60389
+ },
+ "lyrics_come_together.pkl": {
+  "git_sha": "de95b4144bc74b60511e5474f128abb6748952eb",
+  "size": 76228
+ },
+ "lyrics_crazy_gnarls.pkl": {
+  "git_sha": "65c5a1989b781124519596dfbb59635f12b158bd",
+  "size": 69896
+ },
+ "lyrics_enter_sandman.pkl": {
+  "git_sha": "41ec8ffa66cb40e5615a7a580e2d6446ba279471",
+  "size": 82560
+ },
+ "lyrics_every_breath_you_take.pkl": {
+  "git_sha": "e806294bc8674187cee8d1b4bdf169ff221edd18",
+  "size": 152221
+ },
+ "lyrics_get_lucky.pkl": {
+  "git_sha": "54f13ec6f2f0c695f08f1e81fa6c663039861b4f",
+  "size": 164885
+ },
+ "lyrics_gimme_shelter.pkl": {
+  "git_sha": "1fce30b00982ad7bb0a99e572b869d7ebccfa4d0",
+  "size": 82560
+ },
+ "lyrics_happy_pharrell.pkl": {
+  "git_sha": "7d8846c9a9e16ff4b1757dd4122ef2e3a1198759",
+  "size": 202886
+ },
+ "lyrics_hotel_california.pkl": {
+  "git_sha": "f5337a23f56f53faa3521519bcb231efe0364579",
+  "size": 126884
+ },
+ "lyrics_hurt_cash.pkl": {
+  "git_sha": "424c43e72030d0d67d5fff9687cbf8a2bc1fb518",
+  "size": 54057
+ },
+ "lyrics_i_like_it.pkl": {
+  "git_sha": "16c3f0142e65666bb5b7bd34e776e4cdb9b7861a",
+  "size": 342208
+ },
+ "lyrics_i_will_survive.pkl": {
+  "git_sha": "c5316135594bfc7cfa739ab6ba140a30e92b5633",
+  "size": 164885
+ },
+ "lyrics_im_still_standing.pkl": {
+  "git_sha": "46616861186d5ea34b824ec6d62f38f657a68f4d",
+  "size": 114220
+ },
+ "lyrics_jolene.pkl": {
+  "git_sha": "bfeb96c0b4c9320ed1fafcc69822df9ebf72278e",
+  "size": 76228
+ },
+ "lyrics_killer_queen.pkl": {
+  "git_sha": "cba3059bb5182afea8c50dadd5518724730bcb5f",
+  "size": 95224
+ },
+ "lyrics_legends_never_die.pkl": {
+  "git_sha": "f4661f991e0039a0a9892d0ced12fef03ea2820a",
+  "size": 111054
+ },
+ "lyrics_losing_my_religion.pkl": {
+  "git_sha": "532f758fb523ce78868c56e9f0280847fbf64e70",
+  "size": 101556
+ },
+ "lyrics_maggie_may.pkl": {
+  "git_sha": "15b802a17f024b0e6a8234c6165f1c547b6d6a8e",
+  "size": 111054
+ },
+ "lyrics_no_scrubs.pkl": {
+  "git_sha": "686b7f63481be6eec33a032fce8a0edb6f0ba4d8",
+  "size": 234546
+ },
+ "lyrics_old_town_road.pkl": {
+  "git_sha": "13d0226cc6a00409d6ae50ecdc3b0ebe3af78b89",
+  "size": 120552
+ },
+ "lyrics_piano_man.pkl": {
+  "git_sha": "2bde1c48eaf307feb02c17f7114f769b3f06ccc1",
+  "size": 152221
+ },
+ "lyrics_pinball_wizard.pkl": {
+  "git_sha": "3b9f7bb35829a7304b700096feb74426d5f042fa",
+  "size": 76228
+ },
+ "lyrics_purple_rain.pkl": {
+  "git_sha": "dc150f67bb9e97fedcc4cb766488444600ebb602",
+  "size": 69896
+ },
+ "lyrics_rocket_man.pkl": {
+  "git_sha": "2116dadbeb5b32f1c26879ff8a60f66035fda58f",
+  "size": 168051
+ },
+ "lyrics_rolling_in_the_deep.pkl": {
+  "git_sha": "86e8d6048f39773648c8ad9c6de3d6a641e57d49",
+  "size": 225048
+ },
+ "lyrics_shape_of_you.pkl": {
+  "git_sha": "cf460c6c2b8c7df1fd72a295aa3958e7d6f2f8d7",
+  "size": 275713
+ },
+ "lyrics_single_ladies.pkl": {
+  "git_sha": "0fd13319b745ad5d98cc85619aecd81d81f813cf",
+  "size": 275713
+ },
+ "lyrics_smooth_santana.pkl": {
+  "git_sha": "8feb19ba66e1f6815a2d2b42792b377e36f1235a",
+  "size": 139557
+ },
+ "lyrics_still_alive.pkl": {
+  "git_sha": "900f6eae7bd48b625dd07252bee8de643d2e18f5",
+  "size": 101556
+ },
+ "lyrics_stupid_love.pkl": {
+  "git_sha": "ce074484ede049570f5b2257c374f59e87543ce6",
+  "size": 177549
+ },
+ "lyrics_superstition.pkl": {
+  "git_sha": "fefad62f6b7fe89142b732074a5dd06797a939b5",
+  "size": 63555
+ },
+ "lyrics_sweet_home_alabama.pkl": {
+  "git_sha": "484b32fe4a62e7804c1d52a9a2f7b1fe3eef6730",
+  "size": 79394
+ },
+ "lyrics_thinking_out_loud.pkl": {
+  "git_sha": "d5199685394a3b40e75604ed91598d8f6d4b8895",
+  "size": 123718
+ },
+ "lyrics_truth_hurts.pkl": {
+  "git_sha": "a17d3f8df3f060da0c70ee6cea4b252115b5a60a",
+  "size": 168051
+ },
+ "lyrics_umbrella_rihanna.pkl": {
+  "git_sha": "ed1e877843defc67d8fc8a7345b12c338487b47e",
+  "size": 231380
+ },
+ "lyrics_under_the_bridge.pkl": {
+  "git_sha": "b4c7517479eb0181e801755509b0262d6c03344d",
+  "size": 101556
+ },
+ "lyrics_uptown_girl.pkl": {
+  "git_sha": "528c9d32359ee39827b4a6ee937431ca6c1e0573",
+  "size": 88892
+ },
+ "lyrics_viva_la_vida.pkl": {
+  "git_sha": "bba2c0a34b5201e4a5bf27d23f54232b00035010",
+  "size": 120552
+ },
+ "lyrics_waka_waka.pkl": {
+  "git_sha": "70bf66776dd794cbebe9c04968f0f0bf6863dc3b",
+  "size": 149055
+ },
+ "lyrics_we_are_one.pkl": {
+  "git_sha": "11bc9723fe6cea72c6d221aedbd34ebd14275ca0",
+  "size": 180715
+ },
+ "lyrics_wonderful_world.pkl": {
+  "git_sha": "0a69854b167008a8f9d4121bcafa193c4a7f6d1e",
+  "size": 38227
+ },
+ "lyrics_wonderwall.pkl": {
+  "git_sha": "cf8935a466ef289dca8b2596565a643a22ec6eee",
+  "size": 104722
+ },
+ "passage_12_rules_life.pkl": {
+  "git_sha": "f6372e91d866837a8ceea350d3522d65f73dd72b",
+  "size": 5984778
+ },
+ "passage_4_hour_workweek.pkl": {
+  "git_sha": "93e9fac40d896d4bb822d976b2af2efe05960a7a",
+  "size": 2226230
+ },
+ "passage_all_quiet_western_front.pkl": {
+  "git_sha": "9509d393d60d9cbc7e98eaf3f0253a1718fdb0d5",
+  "size": 2694861
+ },
+ "passage_atomic_habits.pkl": {
+  "git_sha": "ad328ceca64f4b0bdb63de69175c0df38e7b8b65",
+  "size": 3179324
+ },
+ "passage_becoming_obama.pkl": {
+  "git_sha": "ecad42aef7946d98f4aa00325c95f17d18a8161e",
+  "size": 6390091
+ },
+ "passage_ben_franklin_life.pkl": {
+  "git_sha": "0a9ca33202199dbfd9505868348c42bee14bf783",
+  "size": 8834567
+ },
+ "passage_brief_history_time.pkl": {
+  "git_sha": "1435bbc58b2bdecdc9e0a172958c56f46e5993c5",
+  "size": 2508040
+ },
+ "passage_catcher_rye.pkl": {
+  "git_sha": "bb3c6ca8eb15d509888acbba3fc46c18bb640961",
+  "size": 3078001
+ },
+ "passage_clash_of_kings.pkl": {
+  "git_sha": "e2fc54121a4b4572c6c0413389f03bf05de68263",
+  "size": 13172585
+ },
+ "passage_crawdads_sing.pkl": {
+  "git_sha": "5521edbabd4bbcc403da79d7f52b6e09fd4c4491",
+  "size": 4214750
+ },
+ "passage_da_vinci_code.pkl": {
+  "git_sha": "7acd4df35f4fa10b015ef6cbe44b6784579e5cb6",
+  "size": 5864461
+ },
+ "passage_fault_in_stars.pkl": {
+  "git_sha": "ad45c549f8df3391d3d0720c7ad7d634ce60a4ed",
+  "size": 2878516
+ },
+ "passage_fellowship_of_the_ring.pkl": {
+  "git_sha": "3a05603a6e6affada6204425245c427aa8e37297",
+  "size": 8071462
+ },
+ "passage_fifty_shades_grey.pkl": {
+  "git_sha": "777224d0a96a0fd4966cc7214f6718599ebe47f1",
+  "size": 6880884
+ },
+ "passage_game_of_thrones.pkl": {
+  "git_sha": "186d79eac3610522a32e5c36eb1c19257bd09b60",
+  "size": 12200486
+ },
+ "passage_goldfinch.pkl": {
+  "git_sha": "5f6ba04c668c6044bd2c521c4c15ac05c023cd08",
+  "size": 12653287
+ },
+ "passage_handmaids_tale.pkl": {
+  "git_sha": "a35816c47786aebeb9c55ccb27629e83530b0d37",
+  "size": 3958268
+ },
+ "passage_harry_potter_chamber.pkl": {
+  "git_sha": "61db7bee97d35f7164081b9748ba748f747a260c",
+  "size": 3619461
+ },
+ "passage_harry_potter_prisoner.pkl": {
+  "git_sha": "8bcba0cb0212ab798ee9f9069a15cedbf1446379",
+  "size": 4648546
+ },
+ "passage_harry_potter_sorcerer.pkl": {
+  "git_sha": "0cf09346fe1f6c11a52457ef581aea0cb70ae3e2",
+  "size": 3397814
+ },
+ "passage_hunger_games.pkl": {
+  "git_sha": "b4b74e44c007078feca120bc90ff5cdf345c524c",
+  "size": 4164085
+ },
+ "passage_intelligent_investor.pkl": {
+  "git_sha": "9e055e08a3fd36d37ea963827276d82a96a3801c",
+  "size": 9062555
+ },
+ "passage_introduction_to_algorithms.pkl": {
+  "git_sha": "b251f783607415b520bc9a0ec4039a7de06e3819",
+  "size": 17931724
+ },
+ "passage_kite_runner.pkl": {
+  "git_sha": "4f3130b117baa045e29fb3955a068ffb8f846959",
+  "size": 4521888
+ },
+ "passage_lean_startup.pkl": {
+  "git_sha": "823b127029d429f05b93574242a819eaba2b0995",
+  "size": 3375643
+ },
+ "passage_life_of_pi.pkl": {
+  "git_sha": "0588533e18d293b8fa87973dc035419059b8a3d2",
+  "size": 4198920
+ },
+ "passage_lion_witch_wardrobe.pkl": {
+  "git_sha": "3684c17216f44ad9a4efa5234683643afd40036e",
+  "size": 13191581
+ },
+ "passage_little_fires_everywhere.pkl": {
+  "git_sha": "f12be8c3146d1aef02c667937a0afdf5feb75173",
+  "size": 4230580
+ },
+ "passage_mans_search_meaning.pkl": {
+  "git_sha": "b44c215c6aa8c2ea6b7c89883b5b9133ac89abbd",
+  "size": 2409885
+ },
+ "passage_men_mars_venus.pkl": {
+  "git_sha": "28f1375958fcc64f97c7ea5ca0142f0fd1bad67d",
+  "size": 3812614
+ },
+ "passage_mindset_success.pkl": {
+  "git_sha": "5dec8880f16ddf8ec3af7679581b3f53a4d555e7",
+  "size": 3695454
+ },
+ "passage_night_circus.pkl": {
+  "git_sha": "4c88e0616d4c5c2f292f9e6fca00dc30b878b3bf",
+  "size": 4803707
+ },
+ "passage_outliers.pkl": {
+  "git_sha": "f843ac4ebe5408cd270e166702e06cb7ba1a3b60",
+  "size": 3635291
+ },
+ "passage_power_of_habit.pkl": {
+  "git_sha": "28770df59369bd50b2d6fa6d5ca00e299328e88a",
+  "size": 5041184
+ },
+ "passage_principles_dalio.pkl": {
+  "git_sha": "c3d5ad9a3f8d7a12fef74c47491ad4dd000c23cd",
+  "size": 6260265
+ },
+ "passage_principles_of_economics.pkl": {
+  "git_sha": "eb50261d608a4aaf4dade5a4fb388f5c71929572",
+  "size": 14727298
+ },
+ "passage_rich_dad_poor_dad.pkl": {
+  "git_sha": "ef1fb0c93086c5d3bd9b1cf3f44636d1d6518b49",
+  "size": 2726521
+ },
+ "passage_sapiens.pkl": {
+  "git_sha": "a41019645e0a4fd8b3b60a8c76113be90fee0008",
+  "size": 5579476
+ },
+ "passage_snow_crash.pkl": {
+  "git_sha": "e5952f2e77ef4ef6452727000381ea09825bde9f",
+  "size": 6665569
+ },
+ "passage_subtle_art_not_giving.pkl": {
+  "git_sha": "30398d7896469026266a540de3ff127fe33e0f0b",
+  "size": 2318053
+ },
+ "passage_sun_and_her_flowers.pkl": {
+  "git_sha": "5537fffed4ed3e98a272d473492c53c67a37db90",
+  "size": 510024
+ },
+ "passage_superintelligence.pkl": {
+  "git_sha": "bcf09a1add4b493d949e0ab4b92325debe6363c0",
+  "size": 6643398
+ },
+ "passage_the_alchemist.pkl": {
+  "git_sha": "59b59d63a876275414faefc07d0260addcd540bc",
+  "size": 1706934
+ },
+ "passage_the_gene.pkl": {
+  "git_sha": "98c3a1814cd69c5798c7b95cab78e647f95bd147",
+  "size": 9233537
+ },
+ "passage_the_shining.pkl": {
+  "git_sha": "e9b57748b89b1f3a80759074b215ab953edb9068",
+  "size": 6988546
+ },
+ "passage_the_silk_roads.pkl": {
+  "git_sha": "a881f1b4167bcb62f45fe40a22cea4e85015c20f",
+  "size": 10512783
+ },
+ "passage_thinking_fast_slow.pkl": {
+  "git_sha": "d32d6cedd9491c8275e71bedfd7d43d98762da74",
+  "size": 7545834
+ },
+ "passage_to_kill_mockingbird.pkl": {
+  "git_sha": "ef847dc37dc05d46995a5d52edf25e39435a3e9f",
+  "size": 4316071
+ },
+ "passage_twilight.pkl": {
+  "git_sha": "7405e1cac714a783f6218e90515117e5aa1e00d5",
+  "size": 5158344
+ },
+ "passage_zero_to_one.pkl": {
+  "git_sha": "88fa497a4f8cf690941e067a32bba928b113e8ed",
+  "size": 1713266
+ }
+}

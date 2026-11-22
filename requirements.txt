@@ -1,8 +1,17 @@
-giskard>=2.14.3
+# Giskard 2.19.x: the advanced induction relies on its detector names, its prompt-injection
+# loader and its text transformations (verified on 2.19.1; the thesis used 2.19.2).
+# The [llm] extra brings litellm, evaluate, bert-score and torch (BERTScore).
+giskard[llm]>=2.19.1,<2.20
 openai>=1.0.0
 pandas>=2.0.0
 PyYAML>=6.0
 python-dotenv>=1.0.0
-litellm>=1.0.0
+# HarmBench copyright evaluation (core/copyright.py).
+datasketch>=2.0       # needs MinHash(scheme="legacy") to read HarmBench's hashes
+spacy>=3.7
+# llama-cpp-python is compiled CPU-only by a plain `pip install`. On a GPU server
+# reinstall it with CUDA, see README.md ("1. Python environment").
 llama-cpp-python[server]
-giskard[llm]
+# Provides the `hf` command used to download the judge weights (README.md, "2. Judge weights").
+# Model weights (.gguf) cannot be installed through pip.
+huggingface_hub>=0.34
