@@ -61,8 +61,9 @@ python3 -m venv risk_env
 source risk_env/bin/activate
 pip install -r requirements.txt     # includes giskard[llm] -> torch, evaluate, bert_score (needed by Giskard)
 
-# A plain pip install of llama-cpp-python is CPU-only. Reinstall it with CUDA:
-CMAKE_ARGS="-DGGML_CUDA=on" pip install --force-reinstall --no-cache-dir "llama-cpp-python[server]"
+# A plain pip install of llama-cpp-python is CPU-only. Rebuild only that package with CUDA
+# (--no-deps: otherwise --force-reinstall also upgrades numpy/pydantic and breaks Giskard):
+CMAKE_ARGS="-DGGML_CUDA=on" pip install --force-reinstall --no-cache-dir --no-deps "llama-cpp-python[server]"
 python -c "import llama_cpp; print(llama_cpp.llama_supports_gpu_offload())"   # must print True
 ```
 

@@ -215,7 +215,7 @@ def main():
                      "with_context": int((advanced["context"] != "").sum())},
         "copyright_reference_hashes_missing": len(missing),
     }
-    with open(OUT_REPORT, "w", encoding="utf-8") as f:
+    with open(OUT_REPORT, "w", encoding="utf-8", newline="\n") as f:  # same bytes on Windows and Linux
         json.dump(report, f, indent=2)
 
     print(f"[+] {OUT_SIMPLE}: {len(simple)} rows {counts(simple)}")

@@ -1,0 +1,5 @@
+# Datasets must be byte-identical on every machine (their SHA-256 is checked and the exact
+# prompts are sent to the models): git must never convert their line endings.
+data/** -text
+# Shell scripts run on Linux (MAGI): always LF.
+*.sh text eol=lf
